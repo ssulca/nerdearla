@@ -1,0 +1,152 @@
+{
+  "data_asset_type": "MyCustomPandasDataset",
+  "expectation_suite_name": "nerdearla",
+  "expectations": [
+    {
+      "expectation_type": "expect_table_columns_to_match_ordered_list",
+      "ge_cloud_id": null,
+      "kwargs": {
+        "column_list": [
+          "dni",
+          "date",
+          "sexo",
+          "estado_civil",
+          "fecha_nacimiento",
+          "asset_level",
+          "education_level"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_type_list",
+      "ge_cloud_id": null,
+      "kwargs": {
+        "column": "estado_civil",
+        "type_list": [
+          "CHAR",
+          "NVARCHAR",
+          "STRING",
+          "StringType",
+          "TEXT",
+          "VARCHAR",
+          "str",
+          "string"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_unique",
+      "ge_cloud_id": null,
+      "kwargs": {
+        "column": "dni"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_match_regex",
+      "ge_cloud_id": null,
+      "kwargs": {
+        "column": "dni",
+        "regex": "^[\\d]{1,3}\\.?[\\d]{3,3}\\.?[\\d]{3,3}$"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_dateutil_parseable",
+      "ge_cloud_id": null,
+      "kwargs": {
+        "column": "date"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_match_strftime_format",
+      "ge_cloud_id": null,
+      "kwargs": {
+        "column": "fecha_nacimiento",
+        "strftime_format": "%Y-%m-%d %H:%M:%S"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "ge_cloud_id": null,
+      "kwargs": {
+        "column": "sexo",
+        "mostly": 0.9,
+        "value_set": [
+          "M",
+          "F"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "ge_cloud_id": null,
+      "kwargs": {
+        "column": "estado_civil",
+        "condition_parser": "pandas",
+        "row_condition": "sexo == \"F\"",
+        "value_set": [
+          "Casado",
+          "Soltero",
+          "Divorciado",
+          "Viudo",
+          "Separado de Hecho",
+          "Novio"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_json_parseable",
+      "ge_cloud_id": null,
+      "kwargs": {
+        "column": "education_level"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_match_json_schema",
+      "ge_cloud_id": null,
+      "kwargs": {
+        "column": "asset_level",
+        "json_schema": {
+          "$schema": "http://json-schema.org/draft-04/schema#",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "id"
+          ],
+          "type": "object"
+        },
+        "mostly": 0.5
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_calculate_age",
+      "ge_cloud_id": null,
+      "kwargs": {
+        "column": "fecha_nacimiento",
+        "date_format": "%Y-%m-%d %H:%M:%S",
+        "min_age": 18
+      },
+      "meta": {}
+    }
+  ],
+  "ge_cloud_id": null,
+  "meta": {
+    "great_expectations_version": "0.13.39"
+  }
+}
